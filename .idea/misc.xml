@@ -26,7 +26,9 @@
         <entry key="app/src/main/res/layout/activity_list_all.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18518518518518517" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.18518518518518517" />
+        <entry key="app/src/main/res/layout/history_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/login_dialog.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/sort_layout.xml" value="0.21331521739130435" />
         <entry key="app/src/main/res/layout/viewholder_cat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/viewholder_popular.xml" value="0.25" />
       </map>
