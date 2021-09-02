@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/drawable/search_background.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/drawable/start_button_background.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/drawable/underlined_text.xml" value="0.23385416666666667" />
+        <entry key="app/src/main/res/layout/activity_bot.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_intro2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_item_detail.xml" value="0.25" />
