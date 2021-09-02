@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
 
             <RadioButton
-                android:id="@+id/btn_!"
+                android:id="@+id/option_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="NAME ( decreasing)" />
@@ -46,7 +46,8 @@
                 android:id="@+id/option_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="other" />
+                android:checked="true"
+                android:text="none" />
         </RadioGroup>
 
         <LinearLayout

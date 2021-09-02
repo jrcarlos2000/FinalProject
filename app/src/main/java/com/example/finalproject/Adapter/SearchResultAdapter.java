@@ -23,9 +23,16 @@ import com.example.finalproject.R;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.viewHolder> implements Filterable {
+
+    public final int SORT_NAME_DECREASING = 1;
+    public final int SORT_NAME_NON_DECREASING = 2;
+    public final int SORT_DIFFICULTY_DECREASING = 3;
+    public final int SORT_DIFFICULTY_NON_DECREASING =4;
     ArrayList<itemDomain> itemDomains = new ArrayList<>();
 
 
@@ -82,6 +89,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         return searchFilter;
     }
     private Filter searchFilter = new Filter() {
+        //-----------------\
+        //CHECK STRING FORMAT FOR FILTERING AT THE END OF THIS FILE::::::
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             ArrayList<itemDomain> filteredList = new ArrayList<>();
@@ -98,6 +107,10 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                 }
             }
 
+            if(!filters[3].contains("?")){
+                filteredList = perform_sort(Integer.parseInt(filters[3]),filteredList);
+            }
+
 
             FilterResults filterResults = new FilterResults();
             filterResults.values = filteredList;
@@ -112,6 +125,38 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             notifyDataSetChanged();
         }
     };
+
+    private ArrayList<itemDomain> perform_sort(int filter, ArrayList<itemDomain> filteredList) {
+        switch(filter){
+            case SORT_NAME_DECREASING:{
+                Log.d("CHECKED IN HERE ", "INCREASING");
+                Collections.sort(filteredList, new Comparator<itemDomain>() {
+                    @Override
+                    public int compare(itemDomain o1, itemDomain o2) {
+                        return o1.getTitle().compareTo(o2.getTitle());
+                    }
+                });
+                Collections.reverse(filteredList);
+                break;
+            }
+            case SORT_NAME_NON_DECREASING:{
+                Collections.sort(filteredList, new Comparator<itemDomain>() {
+                    @Override
+                    public int compare(itemDomain o1, itemDomain o2) {
+                        return o1.getTitle().compareTo(o2.getTitle());
+                    }
+                });
+                break;
+            }
+            case SORT_DIFFICULTY_DECREASING:{
+                break;
+            }
+            case SORT_DIFFICULTY_NON_DECREASING:{
+                break;
+            }
+        }
+        return filteredList;
+    }
 
     private boolean perform_check(int i, itemDomain item, String filter) {
         if (filter.contains("?")){
@@ -148,3 +193,14 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
 
 }
+
+/*
+STRING FORMAT FOR FILTERING:
+        the default values for everything is "?"
+
+        "(mainActivity_subjectReclyclerView - String subject),
+        (ListAllActivity_searchInput - string constraint),
+        (ListAllActivity_filterOption -String {attr : val - val2 -val3}),
+        (ListAllActivity_sortOption - String SortingContraint"
+
+ */

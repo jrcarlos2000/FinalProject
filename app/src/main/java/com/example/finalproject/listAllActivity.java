@@ -85,16 +85,6 @@ public class listAllActivity extends AppCompatActivity {
                 return false;
             }
         });
-//        search_bar.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if((event.getAction() == KeyEvent.ACTION_DOWN )&& (keyCode == KeyEvent.done)) {
-//
-//                }
-//                return false;
-//            }
-//        });
-
 
     }
 
@@ -134,12 +124,42 @@ public class listAllActivity extends AppCompatActivity {
         sort_layout_accept_btn = sort_dialog.findViewById(R.id.sort_layout_accept_btn);
         sort_layout_cancel_btn = sort_dialog.findViewById(R.id.sort_layout_cancel_btn);
 
+
         sort_layout_accept_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 selectedRadioButton = sort_dialog.findViewById(RadioGroup.getCheckedRadioButtonId());
-                Log.d("checked button",selectedRadioButton.getText().toString());
+
+                String id_string = selectedRadioButton.getText().toString();
+                switch(id_string){
+                    case "NAME ( decreasing)" :{
+                        filters[3]= Integer.toString(searchResultAdapter.SORT_NAME_DECREASING);
+                        searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
+                        break;
+                    }
+                    case "NAME (non-decreasing)":{
+                        filters[3]= Integer.toString(searchResultAdapter.SORT_NAME_NON_DECREASING);
+                        searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
+                        break;
+                    }
+                    case "DIFFICULTY ( decreasing)":{
+                        filters[3]= Integer.toString(searchResultAdapter.SORT_DIFFICULTY_DECREASING);
+                        searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
+                        break;
+                    }
+                    case "DIFFICULTY (non-decreasing)":{
+                        filters[3]= Integer.toString(searchResultAdapter.SORT_DIFFICULTY_NON_DECREASING);
+                        searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
+                        break;
+                    }
+                    case "none":{
+                        filters[3]= "?";
+                        searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
+                        break;
+                    }
+                }
+
                 sort_dialog.dismiss();
 
             }
