@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/background_grey.xml" value="0.23385416666666667" />
+        <entry key="app/src/main/res/drawable/background_red.xml" value="0.23385416666666667" />
+        <entry key="app/src/main/res/drawable/bot_background.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/category_background_1.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/category_background_2.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/category_background_3.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/category_background_4.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/category_background_5.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/detail_activity_background.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/detail_activity_section_background.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/detail_page_visited.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/popular_background.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/recent_background.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/search_background.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/start_button_background.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/underlined_text.xml" value="0.23385416666666667" />
+        <entry key="app/src/main/res/layout/activity_intro.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_intro2.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_item_detail.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_list_all.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18518518518518517" />
+        <entry key="app/src/main/res/layout/activity_user.xml" value="0.18518518518518517" />
+        <entry key="app/src/main/res/layout/login_dialog.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/viewholder_cat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/viewholder_popular.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
