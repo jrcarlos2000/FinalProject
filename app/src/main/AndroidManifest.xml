@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
         <activity
+            android:name=".BotActivity"
+            android:exported="true" />
+        <activity
             android:name=".UserActivity"
             android:exported="true" />
         <activity

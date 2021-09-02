@@ -236,7 +236,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerInside"
-                        android:src="@drawable/list_icon" />
+                        android:src="@drawable/list_icon"
+                        android:maxHeight="10dp"
+                        android:maxWidth="10dp"/>
 
                     <TextView
                         android:id="@+id/textView11"
@@ -333,7 +335,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerInside"
-                        android:src="@drawable/settings_icon"
+                        android:src="@drawable/list_icon"
                         tools:visibility="visible" />
 
                     <TextView

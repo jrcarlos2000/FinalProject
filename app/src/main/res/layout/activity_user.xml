@@ -213,7 +213,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerInside"
-                        tools:srcCompat="@drawable/list_icon" />
+                        android:src="@drawable/list_icon" />
 
                     <TextView
                         android:id="@+id/textView11"
@@ -237,7 +237,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerInside"
-                        tools:srcCompat="@drawable/bot_icon" />
+                        android:src="@drawable/bot_icon" />
 
                     <TextView
                         android:id="@+id/textView12"
@@ -286,7 +286,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerInside"
-                        tools:srcCompat="@drawable/user_icon" />
+                        android:src="@drawable/user_icon" />
 
                     <TextView
                         android:id="@+id/textView14"
@@ -310,7 +310,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerInside"
-                        tools:srcCompat="@drawable/list_icon"
+                        android:src="@drawable/list_icon"
                         tools:visibility="visible" />
 
                     <TextView

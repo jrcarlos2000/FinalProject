@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<itemDomain> itemList;
     private DataAdapter dataAdapter;
     private Boolean initialized = false;
-    private LinearLayout list_btn,me_btn;
+    private LinearLayout list_btn,me_btn,bot_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         list_btn = findViewById(R.id.list_btn);
         me_btn = findViewById(R.id.me_btn);
+        bot_btn = findViewById(R.id.bot_btn);
         list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, UserActivity.class));
+            }
+        });
+        bot_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BotActivity.class));
             }
         });
     }
