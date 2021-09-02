@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/detail_page_visited"
+    android:elevation="3dp">
+
+
+    <ImageView
+        android:id="@+id/item_pic"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/covid" />
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="covid-19"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_pic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/item_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_pic"
+        app:layout_constraintTop_toBottomOf="@+id/item_title">
+
+        <TextView
+            android:id="@+id/item_related_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="medicine" />
+
+        <TextView
+            android:id="@+id/item_related_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="biology" />
+
+        <TextView
+            android:id="@+id/item_related_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="health" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
