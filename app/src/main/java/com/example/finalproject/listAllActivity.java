@@ -193,6 +193,7 @@ public class listAllActivity extends AppCompatActivity {
     }
 
     private void filter_btn_pressed() {
+        //set up filter button
     }
 
     private void resetFilters() {
