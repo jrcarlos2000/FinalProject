@@ -198,9 +198,9 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 STRING FORMAT FOR FILTERING:
         the default values for everything is "?"
 
-        "(mainActivity_subjectReclyclerView - String subject),
+        " ( mainActivity_subjectReclyclerView - String subject),
         (ListAllActivity_searchInput - string constraint),
-        (ListAllActivity_filterOption -String {attr : val - val2 -val3}),
-        (ListAllActivity_sortOption - String SortingContraint"
+        (ListAllActivity_filterOption -String {attr : val - val2 - val3}),
+        (ListAllActivity_sortOption - String SortingContraint ）"
 
  */
