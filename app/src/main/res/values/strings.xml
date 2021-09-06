@@ -3,4 +3,6 @@
     <string name="login_string"><u>Log In</u></string>
     <string name="logout_string"><u>Log out</u></string>
     <string name="register_string"><u>Register</u></string>
+    <string name="add_subject"><u>Add</u></string>
+    <string name="delete_subject"><u>Delete</u></string>
 </resources>

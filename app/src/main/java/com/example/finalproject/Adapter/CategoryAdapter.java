@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,8 +25,13 @@ import java.util.ArrayList;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHolder> {
     ArrayList<categoryDomain> CategoryDomains;
 
-    public CategoryAdapter(ArrayList<categoryDomain> categoryDomains) {
-        this.CategoryDomains = categoryDomains;
+
+    private int type;
+
+    public CategoryAdapter() {
+        this.CategoryDomains = new ArrayList<>();
+        this.type = 0;
+
     }
 
     @NonNull
@@ -37,37 +44,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         holder.categoryName.setText(CategoryDomains.get(position).getTitle());
-        String picUrl = "";
-        switch(position){
-            case 0:{
-                picUrl = "physics_icon";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background_1));
-                break;
-            }
-            case 1:{
-                picUrl = "math_icon";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background_2));
-                break;
-            }
-            case 2:{
-                picUrl = "biology_icon";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background_3));
-                break;
-            }
-            case 3:{
-                picUrl = "history_icon";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background_4));
-                break;
-            }
-            case 4:{
-                picUrl = "chemistry_icon";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background_5));
-                break;
-            }
-
+        holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background_5));
+        if(type == 1){
+            holder.delete_btn.setVisibility(View.VISIBLE);
+        }else{
+            holder.delete_btn.setVisibility(View.INVISIBLE);
         }
 
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl,"drawable",holder.itemView.getContext().getPackageName());
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(CategoryDomains.get(position).getPic(),"drawable",holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext())
                 .load(drawableResourceId)
                 .into(holder.categoryPic);
@@ -82,6 +66,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
                 holder.itemView.getContext().startActivity(intent);
             }
         });
+
+        holder.delete_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                CategoryDomains.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position,CategoryDomains.size());
+                notifyDataSetChanged();
+            }
+        });
+
     }
 
 
@@ -94,11 +90,35 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
         TextView categoryName;
         ImageView categoryPic;
         ConstraintLayout mainLayout;
+        ImageButton delete_btn;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             categoryName = itemView.findViewById(R.id.categoryName);
             categoryPic = itemView.findViewById(R.id.categoryPic);
             mainLayout = itemView.findViewById(R.id.mainLayout);
+            delete_btn = itemView.findViewById(R.id.delete_btn);
         }
     }
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+    public void addItem(categoryDomain newItem){
+        CategoryDomains.add(newItem);
+        notifyDataSetChanged();
+    }
+
+    public boolean checkIfExist(String newitem){
+        for(categoryDomain e: CategoryDomains){
+            if(e.getTitle().equalsIgnoreCase(newitem)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

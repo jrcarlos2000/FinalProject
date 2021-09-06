@@ -149,6 +149,7 @@ public class UserActivity extends AppCompatActivity {
                 DataAdapter.User.setLastLog(lastLoggedDate);
                 DataAdapter.User.setPassword(password);
                 DataAdapter.User.log();
+                DataAdapter.User.setSearchLog(new ArrayList<String>());
 
                 init();
 

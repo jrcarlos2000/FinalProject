@@ -11,11 +11,15 @@ import com.example.finalproject.DatabaseAdapter.DataAdapter;
 import com.example.finalproject.Domain.categoryDomain;
 import com.example.finalproject.Domain.itemDomain;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -25,12 +29,21 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView.Adapter adapter,popular_adapter,recent_adapter;
+    private RecyclerView.Adapter popular_adapter,recent_adapter;
+    private CategoryAdapter adapter;
     private RecyclerView recyclerViewCategoryList,recyclerViewPopularList,recyclerViewRecentList;
     private ArrayList<itemDomain> itemList;
     private DataAdapter dataAdapter;
     private Boolean initialized = false;
     private LinearLayout list_btn,me_btn,bot_btn;
+    private TextView add_subject_btn,delete_subject_btn;
+    private ArrayList<categoryDomain> categoryList;
+
+    // BELOW VIEW ITEMS FROM THE ADD_DELETE_SUBJECT ACTIONS
+    private Button mainActivity_add_btn,mainActivity_cancel_btn;
+    private EditText mainActivity_add_input;
+    private TextView add_error_notification;
+    //--------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewPopular();
         recyclerViewRecent();
 
+        //SET UP APP BAR AT THE BOTTOM
         list_btn = findViewById(R.id.list_btn);
         me_btn = findViewById(R.id.me_btn);
         bot_btn = findViewById(R.id.bot_btn);
@@ -77,8 +91,86 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, BotActivity.class));
             }
         });
+
+//------------------------------------------------------------------------------------------------
+        //SET UP OTHER TOUCHABLE BUTTONS LOCATED IN THE LAYOUT
+
+        add_subject_btn = findViewById(R.id.add_subject_btn);
+        delete_subject_btn = findViewById(R.id.delete_subject_btn);
+
+        add_subject_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performAddSubject();
+            }
+        });
+
+        delete_subject_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performDeleteSubject();
+            }
+        });
     }
 
+    private void performDeleteSubject() {
+
+        if(adapter.getType() == 0){
+            adapter.setType(1);
+        }else{
+            adapter.setType(0);
+        }
+        recyclerViewCategoryList.setAdapter(adapter);
+    }
+
+    private void performAddSubject() {
+
+        Dialog inputDialog = new Dialog(MainActivity.this);
+        inputDialog.setContentView(R.layout.add_subject_dialog);
+        inputDialog.setTitle("Add Subject");
+        inputDialog.setCancelable(true);
+        mainActivity_add_btn = inputDialog.findViewById(R.id.mainActivity_add_btn);
+        mainActivity_cancel_btn = inputDialog.findViewById(R.id.mainActivity_cancel_btn);
+        mainActivity_add_input = inputDialog.findViewById(R.id.mainActivity_add_input);
+        add_error_notification = inputDialog.findViewById(R.id.add_error_notification);
+
+        mainActivity_add_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String newSubjectName = mainActivity_add_input.getText().toString();
+                if(!adapter.checkIfExist(newSubjectName)){
+                    adapter.addItem(new categoryDomain(newSubjectName,"default_subject_icon"));
+                    inputDialog.dismiss();
+                }else{
+                    add_error_notification.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+
+        mainActivity_cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputDialog.dismiss();
+            }
+        });
+
+
+        inputDialog.show();
+    }
+
+    private boolean checkCategoryExist(String newSubjectName) {
+
+        for(categoryDomain e : categoryList){
+            if(e.getTitle().equalsIgnoreCase(newSubjectName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //--------------------------------------------------------------------------------------------------------------
     private void parseData() throws IOException {
         InputStreamReader is = new InputStreamReader(getAssets()
                 .open("data.csv"));
@@ -112,14 +204,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewCategoryList = findViewById(R.id.recyclerView);
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
 
-        ArrayList<categoryDomain> categoryList = new ArrayList<>();
-        categoryList.add(new categoryDomain("Physics","physics_icon"));
-        categoryList.add(new categoryDomain("Math","math_icon"));
-        categoryList.add(new categoryDomain("Chemistry","chemistry_icon"));
-        categoryList.add(new categoryDomain("History","history_icon"));
-        categoryList.add(new categoryDomain("Biology","biology_icon"));
+        adapter = new CategoryAdapter();
 
-        adapter = new CategoryAdapter(categoryList);
+        adapter.addItem(new categoryDomain("Physics","physics_icon"));
+        adapter.addItem(new categoryDomain("Math","math_icon"));
+        adapter.addItem(new categoryDomain("Chemistry","chemistry_icon"));
+        adapter.addItem(new categoryDomain("History","history_icon"));
+        adapter.addItem(new categoryDomain("Biology","biology_icon"));
 
         recyclerViewCategoryList.setAdapter(adapter);
 

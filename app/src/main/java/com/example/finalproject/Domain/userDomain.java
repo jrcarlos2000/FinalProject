@@ -1,10 +1,16 @@
 package com.example.finalproject.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+/*
+    FORMAT OF THE USER
+ */
 
 public class userDomain implements Serializable {
 
     private String username,password,lastLog,alias,data;
+    private ArrayList<String> search_log;
     private boolean logged;
 
     public userDomain(String username, String password, String lastLog, String alias, String data) {
@@ -22,6 +28,7 @@ public class userDomain implements Serializable {
         this.alias = "NO_DATA";
         this.data ="";
         this.logged = false;
+        this.search_log = new ArrayList<>();
     }
     public void log(){
         this.logged = true;
@@ -67,5 +74,16 @@ public class userDomain implements Serializable {
 
     public String getData() {
         return data;
+    }
+
+    public ArrayList<String> getSearch_log() {
+        return search_log;
+    }
+    public void setSearchLog(ArrayList<String> e){
+        this.search_log = e;
+    }
+
+    public void add_search_log(String s) {
+        this.search_log.add(s);
     }
 }
