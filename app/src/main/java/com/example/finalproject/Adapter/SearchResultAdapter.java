@@ -99,7 +99,15 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             for(int i = 0; i <5 ;i++){
                 filters[i] = filters[i].toLowerCase();
             }
+            /*
+            filter[1]指的类型（subject），filter[0]指的内容是否包括这字符串
 
+            filteredList = DataAdapter.readDataFromHttp(args[包括filter1和0])
+
+            首先调一下 DataAdapter 的 readDataFromHttp
+
+            然后下面的for loop 删掉，剩下的都能运行
+             */
             for(itemDomain item : DataAdapter.AllItems){
                 if(perform_check(0,item,filters[0])
                     &&perform_check(1,item,filters[1])){

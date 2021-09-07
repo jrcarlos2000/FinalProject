@@ -45,6 +45,35 @@ public class DataAdapter {
         }
         csvReader.close();
     }
+    /*
+     private void init() throws IOException {
+
+        //init User
+        initUser();
+        //init Data
+
+        String row;
+        AllItems = readDataFromHttp(args[]);
+
+    }
+
+    private ArrayList<itemDomain> readDataFromHttp(args[]){
+
+            ArrayList<itemDomain> newList = new  ArrayList<>();
+
+            //请求：参考下面怎么读入assets 的 datacsv 然后开一个新的itemdomain加入list
+            while ((row = csvReader.readLine()) != null) {
+            System.out.println(row);
+            String[] data = row.split("\\|");
+            System.out.println(data[0]+" \n"+data[2]+" \n"+data[1]);
+            itemDomain item_1 = new itemDomain(data[0],data[2],data[1],data[3],data[4]);
+            AllItems.add(item_1);
+            }
+
+            return newList
+
+    }
+     */
 
     public static void initUser() {
         User = new userDomain();

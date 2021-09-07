@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -107,6 +108,16 @@ public class itemDomain implements Serializable {
         return subjects;
     }
 
+    public String getAttsAsString(){
+        String data="";
+        Iterator it = atts.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            data=data+pair.getKey().toString()+": "+pair.getValue().toString()+"\n";
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+        return data;
+    }
 
 
 }
