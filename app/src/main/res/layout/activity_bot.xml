@@ -8,7 +8,7 @@
 
     <!--Recycler view to display chat history-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ChatHistory"
+        android:id="@+id/Chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/MessageBar" />
@@ -25,27 +25,31 @@
         <!--Chat bar (edit message)-->
         <EditText
             android:id="@+id/EditMessage"
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:inputType="text"
-            android:textCursorDrawable="@null"
             android:backgroundTint="@color/yellow_700"
-            android:hint="Send Message" />
+            android:hint="Send Message"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textCursorDrawable="@null" />
 
-        <!--Send (sends text)-->
-        <ImageButton
-            android:id="@+id/Send"
-            android:contentDescription="icon"
-            android:layout_width="0dp"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/SendButton"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="center"
-            app:tint="@color/yellow_700"
-            android:src="@android:drawable/ic_menu_send" />
 
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:contentDescription="send"
+            android:scaleType="center"
+            android:src="@android:drawable/ic_menu_send"
+            app:backgroundTint="@color/yellow_700"
+            app:fabCustomSize="40dp"
+            app:tint="@color/white" />
     </LinearLayout>
 
 </RelativeLayout>
