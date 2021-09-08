@@ -10,6 +10,7 @@ import com.example.finalproject.Adapter.RecentAdapter;
 import com.example.finalproject.DatabaseAdapter.DataAdapter;
 import com.example.finalproject.Domain.categoryDomain;
 import com.example.finalproject.Domain.itemDomain;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<itemDomain> itemList;
     private DataAdapter dataAdapter;
     private Boolean initialized = false;
+    private FloatingActionButton home_btn;
     private LinearLayout list_btn,me_btn,bot_btn;
     private TextView add_subject_btn,delete_subject_btn, ask_bot_btn;
     private ArrayList<categoryDomain> categoryList;
@@ -68,9 +70,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewRecent();
 
         //SET UP APP BAR AT THE BOTTOM
+        home_btn = findViewById(R.id.home_btn);
         list_btn = findViewById(R.id.list_btn);
         me_btn = findViewById(R.id.me_btn);
         bot_btn = findViewById(R.id.bot_btn);
+        home_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+            }
+        });
         list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
