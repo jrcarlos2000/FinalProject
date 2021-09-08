@@ -15,13 +15,14 @@
 
         <!--Text view for displaying message-->
         <TextView
-            android:id="@+id/UserMessageText"
+            android:id="@+id/BotUserMessageText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
             android:padding="3dp"
             android:text="Message"
+            android:textSize="16sp"
             android:textColor="@color/white" />
 
         <!--Image view for displaying user icon-->

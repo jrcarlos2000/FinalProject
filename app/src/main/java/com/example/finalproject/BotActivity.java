@@ -31,13 +31,16 @@ public class BotActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bot);
-        chat = findViewById(R.id.BotChat);
+
+        chat = findViewById(R.id.BotChatRV);
         editMessage = findViewById(R.id.BotEditMessage);
         sendButton = findViewById(R.id.BotSendButton);
-        messages = new ArrayList<>();
-        botAdapter = new BotAdapter(messages, this);
 
-        LinearLayoutManager container = new LinearLayoutManager(this);
+        messages = new ArrayList<>();
+
+        botAdapter = new BotAdapter(messages, this);
+        LinearLayoutManager container = new LinearLayoutManager(BotActivity.this, RecyclerView.VERTICAL, false);
+
         chat.setLayoutManager(container);
         chat.setAdapter(botAdapter);
 
@@ -57,7 +60,6 @@ public class BotActivity extends AppCompatActivity {
     }
 
     private void getResponse(String message) {
-        String url = api_url+message;
-
+        String url = api_url + message;
     }
 }
