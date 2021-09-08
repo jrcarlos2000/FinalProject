@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".BotActivity">
 
     <!--Recycler view to display chat history-->
@@ -28,6 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
+            android:inputType="text"
             android:textCursorDrawable="@null"
             android:backgroundTint="@color/yellow_700"
             android:hint="Send Message" />
@@ -35,13 +36,14 @@
         <!--Send (sends text)-->
         <ImageButton
             android:id="@+id/Send"
+            android:contentDescription="icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="center"
-            android:tint="@color/yellow_700"
+            app:tint="@color/yellow_700"
             android:src="@android:drawable/ic_menu_send" />
 
     </LinearLayout>
