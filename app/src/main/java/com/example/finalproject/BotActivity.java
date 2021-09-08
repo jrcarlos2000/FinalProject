@@ -31,11 +31,12 @@ public class BotActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bot);
-        chat = findViewById(R.id.Chat);
-        editMessage = findViewById(R.id.EditMessage);
-        sendButton = findViewById(R.id.SendButton);
+        chat = findViewById(R.id.BotChat);
+        editMessage = findViewById(R.id.BotEditMessage);
+        sendButton = findViewById(R.id.BotSendButton);
         messages = new ArrayList<>();
         botAdapter = new BotAdapter(messages, this);
+
         LinearLayoutManager container = new LinearLayoutManager(this);
         chat.setLayoutManager(container);
         chat.setAdapter(botAdapter);

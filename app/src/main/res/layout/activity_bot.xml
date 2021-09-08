@@ -8,14 +8,14 @@
 
     <!--Recycler view to display chat history-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Chat"
+        android:id="@+id/BotChat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/MessageBar" />
+        android:layout_above="@id/BotMessageBar" />
 
     <!--Layout for chat bar (type/send) -->
     <LinearLayout
-        android:id="@+id/MessageBar"
+        android:id="@+id/BotMessageBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -24,7 +24,7 @@
 
         <!--Chat bar (edit message)-->
         <EditText
-            android:id="@+id/EditMessage"
+            android:id="@+id/BotEditMessage"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="4"
@@ -35,7 +35,7 @@
             android:textCursorDrawable="@null" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/SendButton"
+            android:id="@+id/BotSendButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
