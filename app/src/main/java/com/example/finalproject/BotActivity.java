@@ -8,8 +8,6 @@ public class BotActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // sup its kevin
-        // sup its kevin again
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bot);
     }

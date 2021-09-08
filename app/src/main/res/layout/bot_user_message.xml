@@ -15,7 +15,7 @@
 
         <!--Text view for displaying message-->
         <TextView
-            android:id="@+id/MessageText"
+            android:id="@+id/UserMessageText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
