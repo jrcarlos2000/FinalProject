@@ -10,8 +10,14 @@ import android.widget.EditText;
 
 import com.example.finalproject.Bot.BotAdapter;
 import com.example.finalproject.Bot.BotChat;
+import com.example.finalproject.DatabaseAdapter.Streamtool;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class BotActivity extends AppCompatActivity {
@@ -53,6 +59,7 @@ public class BotActivity extends AppCompatActivity {
                     messages.add(new BotChat(msg, user_key));
                     botAdapter.notifyDataSetChanged();
                     editMessage.setText("");
+                    chat.scrollToPosition(messages.size()-1);
                     getResponse(msg);
                 }
             }
@@ -60,6 +67,46 @@ public class BotActivity extends AppCompatActivity {
     }
 
     private void getResponse(String message) {
-        String url = api_url + message;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // open connection
+                    URL url = new URL(api_url + message);
+
+                    System.out.println("sent " + message);
+
+                    HttpURLConnection botConnection = (HttpURLConnection) url.openConnection();
+                    botConnection.setConnectTimeout(2000);
+                    botConnection.setRequestMethod("GET");
+                    botConnection.connect();
+
+                    InputStream in = botConnection.getInputStream();
+                    String reply = Streamtool.read(in);
+                    JSONObject replyJSON = new JSONObject(reply);
+
+                    in.close();
+
+                    System.out.println(replyJSON);
+
+                    // display bot message
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                messages.add(new BotChat(replyJSON.getString("cnt"), bot_key));
+                            } catch (Exception e) {
+                                messages.add(new BotChat("Sorry, I don't understand.", bot_key));
+                            }
+
+                            botAdapter.notifyDataSetChanged();
+                            chat.scrollToPosition(messages.size()-1);
+                        }
+                    });
+                } catch (Exception e) {
+                    messages.add(new BotChat("Sorry, I don't understand.", bot_key));
+                }
+            }
+        }).start();
     }
 }
