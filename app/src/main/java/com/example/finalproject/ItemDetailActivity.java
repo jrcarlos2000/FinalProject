@@ -3,6 +3,7 @@ package com.example.finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,7 +31,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     private ArrayList<itemDomain> item_detail_questions;
     private itemDomain object;
 
-    private FloatingActionButton item_detail_close_btn;
+    private FloatingActionButton item_detail_close_btn,item_detail_share_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         }catch (Exception e){
             Log.d("error: ",e.toString());
         }
+
     }
 
     private void getBundle() {
@@ -69,6 +71,19 @@ public class ItemDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        item_detail_share_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String shareBody = "my body here";
+                String shareSub = "your subject here";
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT,shareBody);
+                shareIntent.putExtra(Intent.EXTRA_TEXT,shareSub);
+                startActivity(Intent.createChooser(shareIntent,"Share using:"));
+            }
+        });
     }
 
     private void initView() {
@@ -77,6 +92,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         item_detail_image = findViewById(R.id.item_detail_image);
         item_detail_close_btn = findViewById(R.id.item_detail_close_btn);
         item_detail_attributes = findViewById(R.id.item_detail_attributes);
+        item_detail_share_btn = findViewById(R.id.item_detail_share_btn);
     }
 
     @SuppressLint("HandlerLeak")
