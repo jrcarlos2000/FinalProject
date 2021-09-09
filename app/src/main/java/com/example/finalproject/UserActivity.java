@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -13,10 +14,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.finalproject.DatabaseAdapter.DataAdapter;
 import com.example.finalproject.Domain.userDomain;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +31,8 @@ public class UserActivity extends AppCompatActivity {
 
     private TextView login_btn,register_btn;
     private TextView user_title,user_att_1,user_att_2,user_att_3,log_in_message;
+    private FloatingActionButton home_btn;
+    private LinearLayout list_btn,me_btn,bot_btn;
     private String username,password,alias,lastLoggedDate,user_data;
 
     @Override
@@ -43,6 +48,38 @@ public class UserActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!DataAdapter.User.isLogged())inputUser(false);
                 else logOutAction();
+            }
+        });
+
+        //SET UP APP BAR AT THE BOTTOM
+        home_btn = findViewById(R.id.home_btn);
+        list_btn = findViewById(R.id.list_btn);
+        me_btn = findViewById(R.id.me_btn);
+        bot_btn = findViewById(R.id.bot_btn);
+        home_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserActivity.this, MainActivity.class));
+            }
+        });
+        list_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserActivity.this, listAllActivity.class);
+                intent.putExtra("object","?");
+                startActivity(intent);
+            }
+        });
+        me_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserActivity.this, UserActivity.class));
+            }
+        });
+        bot_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserActivity.this, BotActivity.class));
             }
         });
     }

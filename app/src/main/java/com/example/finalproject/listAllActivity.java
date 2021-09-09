@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import com.example.finalproject.Adapter.SearchResultAdapter;
 import com.example.finalproject.DatabaseAdapter.DataAdapter;
 import com.example.finalproject.Domain.categoryDomain;
 import com.example.finalproject.Domain.itemDomain;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Array;
 import java.util.Locale;
@@ -40,6 +43,8 @@ public class listAllActivity extends AppCompatActivity {
     private RadioButton selectedRadioButton;
     private RadioGroup RadioGroup;
     private String filters[];
+    private FloatingActionButton home_btn;
+    private LinearLayout list_btn,me_btn,bot_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +88,38 @@ public class listAllActivity extends AppCompatActivity {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        //SET UP APP BAR AT THE BOTTOM
+        home_btn = findViewById(R.id.home_btn);
+        list_btn = findViewById(R.id.list_btn);
+        me_btn = findViewById(R.id.me_btn);
+        bot_btn = findViewById(R.id.bot_btn);
+        home_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(listAllActivity.this, MainActivity.class));
+            }
+        });
+        list_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(listAllActivity.this, listAllActivity.class);
+                intent.putExtra("object","?");
+                startActivity(intent);
+            }
+        });
+        me_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(listAllActivity.this, UserActivity.class));
+            }
+        });
+        bot_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(listAllActivity.this, BotActivity.class));
             }
         });
 

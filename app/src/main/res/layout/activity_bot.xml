@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BotActivity"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".BotActivity">
+
+    <!--Recycler view to display chat history-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/BotChatRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/BotMessageBar" />
+
+    <!--Layout for chat bar (type/send) -->
+    <LinearLayout
+        android:id="@+id/BotMessageBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <!--Chat bar (edit message)-->
+        <EditText
+            android:id="@+id/BotEditMessage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:backgroundTint="@color/yellow_700"
+            android:hint="Send Message"
+            android:inputType="text"
+            android:singleLine="true"
+
+            android:textCursorDrawable="@null" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/BotSendButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:contentDescription="send"
+            android:scaleType="center"
+            android:src="@android:drawable/ic_menu_send"
+            app:backgroundTint="@color/yellow_700"
+            app:fabCustomSize="40dp"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>
