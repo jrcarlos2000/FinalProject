@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:background="@drawable/detail_page_visited"
-    android:elevation="3dp">
+    android:elevation="3dp"
+    android:foreground="?selectableItemBackgroundBorderless">
 
 
     <ImageView

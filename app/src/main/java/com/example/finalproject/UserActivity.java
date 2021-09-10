@@ -70,12 +70,7 @@ public class UserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        me_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(UserActivity.this, UserActivity.class));
-            }
-        });
+
         bot_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

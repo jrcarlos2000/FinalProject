@@ -74,12 +74,7 @@ public class MainActivity extends AppCompatActivity {
         list_btn = findViewById(R.id.list_btn);
         me_btn = findViewById(R.id.me_btn);
         bot_btn = findViewById(R.id.bot_btn);
-        home_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
-            }
-        });
+
         list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

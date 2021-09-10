@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/category_background_1">
+        android:background="@drawable/category_background_1"
+        android:foreground="?selectableItemBackgroundBorderless">
 
         <ImageView
             android:id="@+id/categoryPic"

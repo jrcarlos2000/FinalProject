@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.example.finalproject.Bot.BotAdapter;
 import com.example.finalproject.Bot.BotChat;
@@ -32,6 +34,9 @@ public class BotActivity extends AppCompatActivity {
 
     private ArrayList<BotChat> messages;
     private BotAdapter botAdapter;
+
+    private FloatingActionButton home_btn;
+    private LinearLayout list_btn,me_btn,bot_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,33 @@ public class BotActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //SET UP APP BAR AT THE BOTTOM
+        home_btn = findViewById(R.id.home_btn);
+        list_btn = findViewById(R.id.list_btn);
+        me_btn = findViewById(R.id.me_btn);
+        bot_btn = findViewById(R.id.bot_btn);
+        home_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BotActivity.this, MainActivity.class));
+            }
+        });
+        list_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BotActivity.this, listAllActivity.class);
+                intent.putExtra("object","?");
+                startActivity(intent);
+            }
+        });
+        me_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BotActivity.this, UserActivity.class));
+            }
+        });
+
     }
 
     private void getResponse(String message) {

@@ -102,14 +102,7 @@ public class listAllActivity extends AppCompatActivity {
                 startActivity(new Intent(listAllActivity.this, MainActivity.class));
             }
         });
-        list_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(listAllActivity.this, listAllActivity.class);
-                intent.putExtra("object","?");
-                startActivity(intent);
-            }
-        });
+
         me_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
