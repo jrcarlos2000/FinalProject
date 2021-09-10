@@ -20,10 +20,8 @@ public class itemDomain implements Serializable {
     private String description;
     private HashMap<String,String> atts;
     private ArrayList<String>  subjects;
-
-    private String related_1 ;
-    private String related_2 ;
-    private String related_3 ;
+    private String related_1,related_2,related_3;
+    private boolean visited;
     private String pic;
 
     public itemDomain(String title, String description, String pic, String atts,String subjects) {
@@ -40,6 +38,7 @@ public class itemDomain implements Serializable {
 
         this.subjects = new ArrayList<String>(Arrays.asList(subjects.toLowerCase().split(",")));
 
+        this.visited = false;
     }
 
     public String getTitle() {
@@ -118,6 +117,15 @@ public class itemDomain implements Serializable {
         }
         return data;
     }
+    public String getDataAsString(){
+        return "we will shre this data";
+    }
 
+    public void setVisited(){
+        this.visited = true;
+    }
 
+    public boolean isVisited() {
+        return visited;
+    }
 }

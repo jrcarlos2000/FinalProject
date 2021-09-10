@@ -1,27 +1,36 @@
 package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.finalproject.DatabaseAdapter.HttpAdapter;
 import com.example.finalproject.Domain.itemDomain;
+import com.example.finalproject.Domain.ShareableItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class ItemDetailActivity extends AppCompatActivity {
@@ -30,6 +39,8 @@ public class ItemDetailActivity extends AppCompatActivity {
     private ArrayList<itemDomain> item_detail_related;
     private ArrayList<itemDomain> item_detail_questions;
     private itemDomain object;
+    private ConstraintLayout viewToShare;
+    boolean isTextViewClicked = false;
 
     private FloatingActionButton item_detail_close_btn,item_detail_share_btn;
 
@@ -51,11 +62,8 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private void getBundle() {
 
-        Log.d("got data",".....trying");
         object = (itemDomain) getIntent().getSerializableExtra("object");
-        Log.d("got data",".....success");
         int drawableResourceId = this.getResources().getIdentifier(object.getPic(),"drawable",this.getPackageName());
-        Log.d("got resourcePic",".....success");
         Glide.with(this)
                 .load(drawableResourceId)
                 .into(item_detail_image);
@@ -75,13 +83,21 @@ public class ItemDetailActivity extends AppCompatActivity {
         item_detail_share_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                String shareBody = "my body here";
-                String shareSub = "your subject here";
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT,shareBody);
-                shareIntent.putExtra(Intent.EXTRA_TEXT,shareSub);
-                startActivity(Intent.createChooser(shareIntent,"Share using:"));
+
+                  showPopup(item_detail_share_btn);
+
+            }
+        });
+        item_detail_description.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    if(isTextViewClicked){
+                        item_detail_description.setMaxLines(3);
+                        isTextViewClicked = false;
+                    } else {
+                        item_detail_description.setMaxLines(Integer.MAX_VALUE);
+                        isTextViewClicked = true;
+                    }
             }
         });
     }
@@ -93,6 +109,43 @@ public class ItemDetailActivity extends AppCompatActivity {
         item_detail_close_btn = findViewById(R.id.item_detail_close_btn);
         item_detail_attributes = findViewById(R.id.item_detail_attributes);
         item_detail_share_btn = findViewById(R.id.item_detail_share_btn);
+        viewToShare = findViewById(R.id.layoutToShare);
+    }
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.actions, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.share_photo:
+                        ShareItem(true);
+                        return true;
+                    case R.id.share_text:
+                        ShareItem(false);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        popup.show();
+    }
+    private void ShareItem(boolean asPic){
+
+        viewToShare.setDrawingCacheEnabled(true);
+        Bitmap b = viewToShare.getDrawingCache();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        b.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        ShareableItem itemToShare = new ShareableItem(asPic,object.getDataAsString(),byteArray);
+
+        Intent intent = new Intent(ItemDetailActivity.this, FacebookShareActivity.class);
+        intent.putExtra("itemToShare",itemToShare);
+        startActivity(intent);
+
     }
 
     @SuppressLint("HandlerLeak")

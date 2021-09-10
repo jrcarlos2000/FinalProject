@@ -60,19 +60,27 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                 .load(drawableResourceId)
                 .into(holder.item_pic);
 
-        int drawableResourceId2 = holder.itemView.getContext().getResources().getIdentifier("recent_background","drawable",holder.itemView.getContext().getPackageName());
-
+        //SET THE BACKGROUND TO BE GRAY IF THE ITEM WAS ALREADY VISITED
+        int drawableResourceId2;
+        if(itemDomains.get(position).isVisited()){
+            drawableResourceId2 = holder.itemView.getContext().getResources().getIdentifier("item_visited_background","drawable",holder.itemView.getContext().getPackageName());
+            holder.item_layout.setBackground(holder.itemView.getContext().getResources().getDrawable(drawableResourceId2));
+        }else{
+            drawableResourceId2 = holder.itemView.getContext().getResources().getIdentifier("recent_background","drawable",holder.itemView.getContext().getPackageName());
+        }
 
         holder.item_layout.setBackground(holder.itemView.getContext().getResources().getDrawable(drawableResourceId2));
-
         holder.item_layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-
+                //set to gray
+                itemDomains.get(position).setVisited();
+                //-------
                 Intent intent = new Intent(holder.itemView.getContext(), ItemDetailActivity.class);
                 intent.putExtra("object",itemDomains.get(position));
                 holder.itemView.getContext().startActivity(intent);
+
             }
         });
 
