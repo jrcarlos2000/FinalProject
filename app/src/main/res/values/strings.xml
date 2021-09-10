@@ -5,4 +5,6 @@
     <string name="register_string"><u>Register</u></string>
     <string name="add_subject"><u>Add</u></string>
     <string name="delete_subject"><u>Delete</u></string>
+    <string name="facebook_app_id">377364307208616</string>
+    <string name="fb_login_protocol_scheme">fb377364307208616</string>
 </resources>

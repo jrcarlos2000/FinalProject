@@ -118,6 +118,9 @@ public class itemDomain implements Serializable {
         }
         return data;
     }
+    public String getDataAsString(){
+        return "we will shre this data";
+    }
 
 
 }
