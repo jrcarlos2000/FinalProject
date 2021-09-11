@@ -40,7 +40,7 @@
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:imeOptions="actionDone"
-                    android:hint="Search your subject"
+                    android:hint="Search by anything"
                     android:inputType="textPersonName"
                     android:paddingStart="10dp"
                     android:textColorHint="@color/black"

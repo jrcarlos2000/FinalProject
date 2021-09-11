@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/search_bar"
+                    android:id="@+id/mainSearchBar"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
@@ -42,6 +42,7 @@
                     android:inputType="textPersonName"
                     android:paddingStart="10dp"
                     android:textColorHint="@color/black"
+                    android:imeOptions="actionDone"
                     android:textSize="17sp"
                     android:textStyle="italic"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +60,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/search_bar">
+                    app:layout_constraintTop_toBottomOf="@+id/mainSearchBar">
 
                     <ImageView
                         android:id="@+id/imageView3"

@@ -13,10 +13,15 @@ import com.example.finalproject.Domain.itemDomain;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout list_btn,me_btn,bot_btn;
     private TextView add_subject_btn,delete_subject_btn, ask_bot_btn,recentsText;
     private ArrayList<categoryDomain> categoryList;
+    private EditText mainSearchBar;
 
     // BELOW VIEW ITEMS FROM THE ADD_DELETE_SUBJECT ACTIONS
     private Button mainActivity_add_btn,mainActivity_cancel_btn;
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         list_btn = findViewById(R.id.list_btn);
         me_btn = findViewById(R.id.me_btn);
         bot_btn = findViewById(R.id.bot_btn);
+        mainSearchBar = findViewById(R.id.mainSearchBar);
 
         list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +118,34 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, BotActivity.class));
             }
         });
+
+        //SET UP SEARCH BY SUBJECT BAR
+
+        mainSearchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String s = mainSearchBar.getText().toString();
+                if(actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || event.getAction() == KeyEvent.ACTION_DOWN
+                        && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && !s.isEmpty()){
+                    DataAdapter.User.add_search_log(mainSearchBar.getText().toString());
+
+                    InputMethodManager inputManager = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.toggleSoftInput(0, 0);
+
+                    //pass parameter to list all
+
+                    Intent intent = new Intent(MainActivity.this, listAllActivity.class);
+                    intent.putExtra("object",s);
+                    startActivity(intent);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
 

@@ -4,14 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.finalproject.Bot.BotAdapter;
 import com.example.finalproject.Bot.BotChat;
+import com.example.finalproject.DatabaseAdapter.DataAdapter;
 import com.example.finalproject.DatabaseAdapter.Streamtool;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -55,10 +62,38 @@ public class BotActivity extends AppCompatActivity {
         chat.setLayoutManager(container);
         chat.setAdapter(botAdapter);
 
+        editMessage.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || event.getAction() == KeyEvent.ACTION_DOWN
+                        && event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+
+                    InputMethodManager inputManager = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.toggleSoftInput(0, 0);
+
+                    String msg = editMessage.getText().toString();
+                    if(!msg.isEmpty()) {
+                        messages.add(new BotChat(msg, user_key));
+                        botAdapter.notifyDataSetChanged();
+                        editMessage.setText("");
+                        chat.scrollToPosition(messages.size()-1);
+                        getResponse(msg);
+                    }
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // When a message is sent
+                // When a message is sent first hide keyboard
+                InputMethodManager inputManager = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.toggleSoftInput(0, 0);
                 String msg = editMessage.getText().toString();
                 if(!msg.isEmpty()) {
                     messages.add(new BotChat(msg, user_key));
