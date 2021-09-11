@@ -188,6 +188,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView2"
                     android:layout_width="match_parent"
@@ -200,7 +201,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/recentsText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -223,7 +224,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                    app:layout_constraintTop_toBottomOf="@+id/recentsText" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

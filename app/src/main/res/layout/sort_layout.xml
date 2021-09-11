@@ -41,13 +41,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DIFFICULTY (non-decreasing)" />
-
             <RadioButton
                 android:id="@+id/option_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="POPULARITY (decreasing)" />
+            <RadioButton
+                android:id="@+id/option_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="POPULARITY (non-decreasing)" />
+
+            <RadioButton
+                android:id="@+id/option_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="none" />
+
+
         </RadioGroup>
 
         <LinearLayout

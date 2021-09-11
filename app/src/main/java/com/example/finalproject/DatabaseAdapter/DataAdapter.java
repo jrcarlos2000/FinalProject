@@ -1,19 +1,26 @@
 package com.example.finalproject.DatabaseAdapter;
+import com.example.finalproject.Domain.categoryDomain;
 import com.example.finalproject.Domain.itemDomain;
 import com.example.finalproject.Domain.userDomain;
+import com.facebook.all.All;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
-
+import java.util.Iterator;
 
 
 public class DataAdapter {
     //实体
     public static ArrayList<itemDomain> AllItems;
+    public static ArrayList<categoryDomain> AllCategories;
     //用户数据
     public static userDomain User;
     private BufferedReader csvReader;
@@ -26,6 +33,16 @@ public class DataAdapter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        initCategories();
+    }
+
+    private void initCategories() {
+        AllCategories = new ArrayList<>();
+        AllCategories.add(new categoryDomain("Physics","physics_icon"));
+        AllCategories.add(new categoryDomain("Math","math_icon"));
+        AllCategories.add(new categoryDomain("Chemistry","chemistry_icon"));
+        AllCategories.add(new categoryDomain("History","history_icon"));
+        AllCategories.add(new categoryDomain("Biology","biology_icon"));
     }
 
     private void init() throws IOException {
@@ -82,5 +99,39 @@ public class DataAdapter {
     private void setUserData(String S){
 
     }
+    public static ArrayList<itemDomain> getRecents(){
+        ArrayList<itemDomain> recents = new ArrayList<>();
+        recents.addAll(AllItems);
+        Collections.sort(recents, new Comparator<itemDomain>() {
+            public int compare(itemDomain o1, itemDomain o2) {
+                return o1.getLastTimeVisited().compareTo(o2.getLastTimeVisited());
+            }
+        });
+        Collections.reverse(recents);
+        recents.subList(3,recents.size()).clear();
+        Date initialDate = new Date(0);
 
+        Iterator<itemDomain> iterator = recents.iterator();
+        while(iterator.hasNext()) {
+            itemDomain next = iterator.next();
+            if(next.getLastTimeVisited().compareTo(initialDate)==0) {
+                iterator.remove();
+            }
+        }
+        return recents;
+    }
+
+    public static ArrayList<itemDomain> getPopulars(){
+        ArrayList<itemDomain> populars = new ArrayList<>();
+        populars.addAll(AllItems);
+        Collections.sort(populars, new Comparator<itemDomain>() {
+            public int compare(itemDomain o1, itemDomain o2) {
+                return o1.getPopularity()-o2.getPopularity();
+            }
+        });
+        Collections.reverse(populars);
+        populars.subList(3,populars.size()).clear();
+
+        return populars;
+    }
 }

@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private CategoryAdapter adapter;
     private RecyclerView recyclerViewCategoryList,recyclerViewPopularList,recyclerViewRecentList;
     private ArrayList<itemDomain> itemList;
-    private DataAdapter dataAdapter;
+
     private Boolean initialized = false;
     private FloatingActionButton home_btn;
     private LinearLayout list_btn,me_btn,bot_btn;
-    private TextView add_subject_btn,delete_subject_btn, ask_bot_btn;
+    private TextView add_subject_btn,delete_subject_btn, ask_bot_btn,recentsText;
     private ArrayList<categoryDomain> categoryList;
 
     // BELOW VIEW ITEMS FROM THE ADD_DELETE_SUBJECT ACTIONS
@@ -51,20 +51,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("YourTag", "YourOutput");
-        try {
-            parseData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Log.d("YourTag", "YourOutput2");
-        if(!initialized){
-            try {
-                parseData();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            initialized = true;
-        }
+        recentsText = findViewById(R.id.recentsText);
+
         recyclerViewCategory();
         recyclerViewPopular();
         recyclerViewRecent();
@@ -183,21 +171,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    //--------------------------------------------------------------------------------------------------------------
-    private void parseData() throws IOException {
-
-        //这边需要写标准数据，如果没有标准数据，什么都不能显示
-        //这个是第一个请求
-        //dataAdapter = new DataAdapter(请求args[]);
-        //dataAdapter上 专门写了一个请求function ：readDataFromHttp（args）
-        //dataAdapter 的 allitems 不能initialized之后修改，这就是标准数据（default data）
-        //下面的代码课删掉
-
-        InputStreamReader is = new InputStreamReader(getAssets()
-                .open("data.csv"));
-        BufferedReader csvReader = new BufferedReader(is);
-        dataAdapter = new DataAdapter("test_data",csvReader);
-    }
+//----------
 
     private void recyclerViewRecent() {
 
@@ -205,8 +179,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewRecentList = findViewById(R.id.recyclerView3);
         recyclerViewRecentList.setLayoutManager(linearLayoutManager);
 
-        recent_adapter = new RecentAdapter(dataAdapter.AllItems);
+        recent_adapter = new RecentAdapter(DataAdapter.getRecents());
         recyclerViewRecentList.setAdapter(recent_adapter);
+
+        if(DataAdapter.getRecents().size()==0){
+            Log.d("entro en recents" ,"succeess" );
+            recentsText.setText(recentsText.getText().toString());
+            recentsText.append("        NO ITEMS VISITED RECENTLY");
+        }else{
+            recentsText.setText("RECENTS");
+        }
     }
 
     private void recyclerViewPopular() {
@@ -215,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewPopularList = findViewById(R.id.recyclerView2);
         recyclerViewPopularList.setLayoutManager(linearLayoutManager);
 
-        popular_adapter = new PopularAdapter(dataAdapter.AllItems);
+        popular_adapter = new PopularAdapter(DataAdapter.getPopulars());
         recyclerViewPopularList.setAdapter(popular_adapter);
 
     }
@@ -225,14 +207,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewCategoryList = findViewById(R.id.recyclerView);
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
 
-        adapter = new CategoryAdapter();
-
-        adapter.addItem(new categoryDomain("Physics","physics_icon"));
-        adapter.addItem(new categoryDomain("Math","math_icon"));
-        adapter.addItem(new categoryDomain("Chemistry","chemistry_icon"));
-        adapter.addItem(new categoryDomain("History","history_icon"));
-        adapter.addItem(new categoryDomain("Biology","biology_icon"));
-
+        adapter = new CategoryAdapter(DataAdapter.AllCategories);
         recyclerViewCategoryList.setAdapter(adapter);
 
 

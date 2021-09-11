@@ -28,8 +28,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
 
     private int type;
 
-    public CategoryAdapter() {
-        this.CategoryDomains = new ArrayList<>();
+    public CategoryAdapter(ArrayList<categoryDomain> CategoryDomains) {
+        this.CategoryDomains = CategoryDomains;
         this.type = 0;
 
     }

@@ -33,6 +33,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     public final int SORT_NAME_NON_DECREASING = 2;
     public final int SORT_DIFFICULTY_DECREASING = 3;
     public final int SORT_DIFFICULTY_NON_DECREASING =4;
+    public final int SORT_POPULARITY_DECREASING = 5;
+    public final int SORT_POPULARITY_NON_DECREASING = 6;
     ArrayList<itemDomain> itemDomains = new ArrayList<>();
 
 
@@ -74,12 +76,14 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
             @Override
             public void onClick(View v) {
-                //set to gray
+                //set to gray and set the last time visited
                 itemDomains.get(position).setVisited();
+                itemDomains.get(position).updateLastTimeVisited();
                 //-------
                 Intent intent = new Intent(holder.itemView.getContext(), ItemDetailActivity.class);
                 intent.putExtra("object",itemDomains.get(position));
                 holder.itemView.getContext().startActivity(intent);
+                notifyDataSetChanged();
 
             }
         });
@@ -160,6 +164,25 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                     @Override
                     public int compare(itemDomain o1, itemDomain o2) {
                         return o1.getTitle().compareTo(o2.getTitle());
+                    }
+                });
+                break;
+            }
+            case SORT_POPULARITY_DECREASING:{
+                Collections.sort(filteredList, new Comparator<itemDomain>() {
+                    @Override
+                    public int compare(itemDomain o1, itemDomain o2) {
+                        return o1.getPopularity()-o2.getPopularity();
+                    }
+                });
+                Collections.reverse(filteredList);
+                break;
+            }
+            case SORT_POPULARITY_NON_DECREASING:{
+                Collections.sort(filteredList, new Comparator<itemDomain>() {
+                    @Override
+                    public int compare(itemDomain o1, itemDomain o2) {
+                        return o1.getPopularity()-o2.getPopularity();
                     }
                 });
                 break;

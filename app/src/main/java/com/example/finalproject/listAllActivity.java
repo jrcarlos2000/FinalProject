@@ -67,10 +67,7 @@ public class listAllActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                filters[0] = "?";
-                filters[1] = s.toString();
-                searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
-                return;
+
             }
         });
         search_bar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -84,6 +81,10 @@ public class listAllActivity extends AppCompatActivity {
 
                     InputMethodManager inputManager = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.toggleSoftInput(0, 0);
+
+                    filters[0] = "?";
+                    filters[1] = search_bar.getText().toString();
+                    searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
 
                     return true;
                 }
@@ -180,6 +181,17 @@ public class listAllActivity extends AppCompatActivity {
                     }
                     case "DIFFICULTY (non-decreasing)":{
                         filters[3]= Integer.toString(searchResultAdapter.SORT_DIFFICULTY_NON_DECREASING);
+                        searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
+                        break;
+                    }
+
+                    case "POPULARITY (decreasing)":{
+                        filters[3]= Integer.toString(searchResultAdapter.SORT_POPULARITY_DECREASING);
+                        searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
+                        break;
+                    }
+                    case "POPULARITY (non-decreasing)":{
+                        filters[3]= Integer.toString(searchResultAdapter.SORT_POPULARITY_NON_DECREASING);
                         searchResultAdapter.getFilter().filter(TextUtils.join("|",filters));
                         break;
                     }

@@ -45,7 +45,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.viewHolder
                 .load(drawableResourceId)
                 .into(holder.item_pic);
 
-        int drawableResourceId2 = holder.itemView.getContext().getResources().getIdentifier("recent_background","drawable",holder.itemView.getContext().getPackageName());
+        int drawableResourceId2 = holder.itemView.getContext().getResources().getIdentifier("item_visited_background","drawable",holder.itemView.getContext().getPackageName());
 
 
         holder.item_layout.setBackground(holder.itemView.getContext().getResources().getDrawable(drawableResourceId2));
