@@ -38,6 +38,7 @@
         <entry key="app/src/main/res/layout/sort_layout.xml" value="0.21331521739130435" />
         <entry key="app/src/main/res/layout/viewholder_cat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/viewholder_popular.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/viewholder_related.xml" value="0.42524271844660194" />
         <entry key="app/src/main/res/menu/actions.xml" value="0.18703703703703703" />
       </map>
     </option>

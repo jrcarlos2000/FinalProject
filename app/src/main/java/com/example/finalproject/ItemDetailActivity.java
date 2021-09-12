@@ -2,6 +2,8 @@ package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -22,6 +24,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.finalproject.Adapter.CategoryAdapter;
+import com.example.finalproject.Adapter.RelatedQuestionAdapter;
+import com.example.finalproject.DatabaseAdapter.DataAdapter;
 import com.example.finalproject.DatabaseAdapter.HttpAdapter;
 import com.example.finalproject.Domain.itemDomain;
 import com.example.finalproject.Domain.ShareableItem;
@@ -42,6 +47,11 @@ public class ItemDetailActivity extends AppCompatActivity {
     private ConstraintLayout viewToShare;
     boolean isTextViewClicked = false;
 
+    private RelatedQuestionAdapter relatedAdapter;
+    private RelatedQuestionAdapter questionAdapter;
+    private RecyclerView recyclerViewRelatedList;
+    private RecyclerView recyclerViewQuestionList;
+
     private FloatingActionButton item_detail_close_btn,item_detail_share_btn;
 
     @Override
@@ -50,6 +60,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_detail);
         initView();
         getBundle();
+
+        recyclerViewRelated();
+        recyclerViewQuestions();
 
         String url = "http://10.0.2.2:8080/searchitem?course=geo&searchKey=北京";
         try{
@@ -145,6 +158,38 @@ public class ItemDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(ItemDetailActivity.this, FacebookShareActivity.class);
         intent.putExtra("itemToShare",itemToShare);
         startActivity(intent);
+
+    }
+
+    private void recyclerViewRelated() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerViewRelatedList = findViewById(R.id.related_recycler_view);
+        recyclerViewRelatedList.setLayoutManager(linearLayoutManager);
+
+        ArrayList<String> data = new ArrayList<>();
+
+        //ADD DATA :
+        data.add("how are you doing today?");
+        data.add("hi");
+        data.add("hi");
+        //--------------------
+        relatedAdapter = new RelatedQuestionAdapter(data,1);
+        recyclerViewRelatedList.setAdapter(relatedAdapter);
+
+    }
+    private void recyclerViewQuestions() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerViewQuestionList = findViewById(R.id.questions_recycler_view);
+        recyclerViewQuestionList.setLayoutManager(linearLayoutManager);
+
+        ArrayList<String> data = new ArrayList<>();
+
+        //ADD DATA :
+        data.add("how are you doing today?");
+        data.add("hi");
+        //--------------------
+        questionAdapter = new RelatedQuestionAdapter(data,2);
+        recyclerViewQuestionList.setAdapter(questionAdapter);
 
     }
 
